@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "PocketAPI"
+  s.name         = "PocketSDK"
   s.version      = "1.0"
   s.summary      = "Objective-C SDK for authenticating and making API calls to the Pocket API."
   s.description  = <<-DESC
