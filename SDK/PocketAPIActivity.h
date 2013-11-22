@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PocketActivityDelegate
+
+- (void)pocketDidFinishedSave:(BOOL)result;
+
+@end
+
 @interface PocketAPIActivity : UIActivity
+
+
+@property (nonatomic, assign) id delegate;
+
 
 @end

@@ -13,7 +13,8 @@
 
 @implementation PocketAPIActivity
 {
-	NSArray *_URLs;
+//	NSArray *_URLs;
+    NSURL *_URL;
 }
 
 - (NSString *)activityType
@@ -48,43 +49,52 @@
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems
 {
-	NSMutableArray *URLs = [NSMutableArray array];
+//	NSMutableArray *URLs = [NSMutableArray array];
 	
 	for (id activityItem in activityItems) {
 		if ([activityItem isKindOfClass:[NSURL class]]) {
-			[URLs addObject:activityItem];
+//			[URLs addObject:activityItem];
+            _URL = activityItem;
 		}
 	}
 	
-	[_URLs release];
-	_URLs = [URLs copy];
+//	[_URLs release];
+//	_URLs = [URLs copy];
 }
+
 
 - (void)performActivity
 {
-	__block NSUInteger URLsLeft = _URLs.count;
-	__block BOOL URLFailed = NO;
+//	__block NSUInteger URLsLeft = _URLs.count;
+//	__block BOOL URLFailed = NO;
 	
-	for (NSURL *URL in _URLs) {
-		[[PocketAPI sharedAPI] saveURL:URL handler: ^(PocketAPI *API, NSURL *URL, NSError *error) {
+//	for (NSURL *URL in _URLs) {
+		[[PocketAPI sharedAPI] saveURL:_URL handler: ^(PocketAPI *API, NSURL *URL, NSError *error) {
 			if (error != nil) {
-				URLFailed = YES;
-			}
+//				URLFailed = YES;
+                NSLog(@"PocketActivity:save failed");
+                [self.delegate pocketDidFinishedSave:NO];
+			} else {
+                NSLog(@"PocketActivity:saved!");
+                [self.delegate pocketDidFinishedSave:YES];
+            }
 			
-			URLsLeft--;
+//			URLsLeft--;
 			
-			if (URLsLeft == 0) {
-				[self activityDidFinish:!URLFailed];
-			}
+//			if (URLsLeft == 0) {
+//				[self activityDidFinish:!URLFailed];
+//			}
 		}];
-	}
+//	}
+    [self activityDidFinish:YES];
 }
 
-- (void)dealloc
-{
-	[_URLs release];
-	
-	[super dealloc];
-}
+
+//- (void)dealloc
+//{
+//	[_URLs release];
+//	
+//	[super dealloc];
+//}
 
 @end
