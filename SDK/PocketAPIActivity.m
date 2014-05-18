@@ -24,7 +24,7 @@
 
 - (NSString *)activityTitle
 {
-	return NSLocalizedString(@"Send to Pocket", nil);
+	return NSLocalizedString(@"Pocketに\n保存", nil);
 }
 
 - (UIImage *)activityImage
