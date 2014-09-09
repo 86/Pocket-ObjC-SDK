@@ -75,7 +75,7 @@
                 NSLog(@"PocketActivity:save failed");
                 [self.delegate pocketDidFinishedSave:NO];
 			} else {
-                NSLog(@"PocketActivity:saved!");
+//                NSLog(@"PocketActivity:saved!");
                 [self.delegate pocketDidFinishedSave:YES];
             }
 			
